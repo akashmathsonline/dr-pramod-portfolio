@@ -1,0 +1,111 @@
+---
+const awards = [
+  {
+    year: '2025',
+    title: "National Teachers' Award",
+    org: 'Ministry of Education, Govt. of India',
+    detail: 'Conferred by Hon\'ble President Smt. Droupadi Murmu',
+    featured: true,
+  },
+  {
+    year: '2020',
+    title: 'CBSE National Teachers\' Award',
+    org: 'CBSE, Ministry of Education',
+    detail: 'For excellence in teaching & counselling',
+    featured: true,
+  },
+  {
+    year: '2020',
+    title: 'GOC Commendation',
+    org: 'GOC J&B Sub Area',
+    detail: 'For exceptional academic & counselling excellence',
+  },
+  {
+    year: '2022',
+    title: 'Best Teacher Award',
+    org: 'Nalanda Sahodaya Cluster, CBSE RO Patna',
+    detail: 'Recognized for innovative teaching practices',
+  },
+  {
+    year: '2015',
+    title: 'Certificate for Innovative Teaching',
+    org: 'Union Minister Smt. Smriti Zubin Irani',
+    detail: 'For pioneering classroom innovations',
+  },
+  {
+    year: 'Multiple',
+    title: 'Appreciation from Chairman CBSE',
+    org: 'Central Board of Secondary Education',
+    detail: 'For community work across India & abroad',
+  },
+];
+---
+
+<section id="accolades" class="relative bg-navy-950 py-24 px-6 lg:px-10 overflow-hidden">
+  <!-- Decorative -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <span class="w-12 h-px bg-gold-500"></span>
+        <span class="text-gold-500 text-xs font-semibold tracking-[0.3em] uppercase">Accolades</span>
+        <span class="w-12 h-px bg-gold-500"></span>
+      </div>
+      <h2 class="font-serif text-4xl lg:text-6xl font-bold text-white leading-tight">
+        Honours & <span class="italic text-gold-500">Recognition</span>
+      </h2>
+      <p class="text-slate-400 mt-6 max-w-2xl mx-auto text-lg">
+        A journey marked by national honours, institutional trust, and the quiet satisfaction of transforming lives.
+      </p>
+    </div>
+
+    <!-- Awards Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {awards.map((award) => (
+        <div class={`group relative p-8 rounded-2xl border transition-all duration-500 hover:-translate-y-2
+                     ${award.featured 
+                       ? 'bg-gradient-to-br from-gold-500/10 to-navy-900 border-gold-500/40 hover:border-gold-500' 
+                       : 'bg-white/5 border-white/10 hover:border-white/30'}`}>
+          
+          {award.featured && (
+            <div class="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" 
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="text-navy-900">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+              </svg>
+            </div>
+          )}
+
+          <div class="flex items-baseline justify-between mb-4">
+            <span class={`font-serif text-3xl font-bold ${award.featured ? 'text-gold-500' : 'text-white/40'}`}>
+              {award.year}
+            </span>
+          </div>
+
+          <h3 class={`font-serif text-xl font-bold mb-2 leading-snug ${award.featured ? 'text-white' : 'text-white'}`}>
+            {award.title}
+          </h3>
+          
+          <p class={`text-xs font-medium tracking-wider uppercase mb-3 ${award.featured ? 'text-gold-400' : 'text-slate-500'}`}>
+            {award.org}
+          </p>
+          
+          <p class="text-sm text-slate-400 leading-relaxed">
+            {award.detail}
+          </p>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

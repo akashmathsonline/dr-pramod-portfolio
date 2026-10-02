@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+  { name: 'All', key: 'all' },
+  { name: 'Ecology', key: 'ecology' },
+  { name: 'Psychology', key: 'psychology' },
+  { name: 'ICT', key: 'ict' },
+  { name: 'Other', key: 'other' },
+];
+
+const papers = [
+  { n: 1, title: 'Birth order and academic performance', journal: 'International Journal of Education for the Future', issn: '2394-9902', year: '2019', category: 'psychology' },
+  { n: 2, title: 'Management techniques of aquaculture and harvesting in context of carrying capacity of fresh water ponds', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X', year: '2018', category: 'ecology' },
+  { n: 3, title: 'Studies of distribution in time and space of the periphyton on ponds of Nalanda (Bihar)', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X', year: '2017', category: 'ecology' },
+  { n: 4, title: 'Planktonic primary productivity of fresh water ponds in Tirhut region (North Bihar)', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X', year: '2017', category: 'ecology' },
+  { n: 5, title: 'Study of some aspects of ecology of certain fish ponds in relation to seasonal variation in Physico-chemical characters', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X', year: '2016', category: 'ecology' },
+  { n: 6, title: 'Studies on the seasonal variation in Macrophytic Population and its impact on Fish production in the ponds of South Bihar', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2020', category: 'ecology' },
+  { n: 7, title: 'A study on relation between Need for Achievement and Sibling distance in Adolescent Learners', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2020', category: 'psychology' },
+  { n: 8, title: 'A study on significant variation in Need of Affiliation with Sibling-distance in Adolescents', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2020', category: 'psychology' },
+  { n: 9, title: 'A study on usefulness of ICT for Teachers and Students in teaching Science subjects at the school level', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2021', category: 'ict' },
+  { n: 10, title: 'Study on relation between Birth Order and Personality', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2021', category: 'psychology' },
+  { n: 11, title: 'Science and technology as a tool for promoting peace', journal: 'Proceedings of Intl. Conference on Holistic Development', issn: '978-93-9235-718-5', year: '2022', category: 'other' },
+  { n: 12, title: 'A study of usefulness of ICT for teachers and students in teaching-learning process of science subject', journal: 'Aegaeum Journal', issn: '0776-3808', year: '2021', category: 'ict' },
+  { n: 13, title: 'Use of bio-fertilizers maintains the nutritional value of crop', journal: 'E-journal of VB University, Hazaribagh', issn: 'Refereed', year: '2020', category: 'ecology' },
+  { n: 14, title: 'ICT as important tool for teachers undergoing training in Training Colleges of India', journal: 'Proceedings of Intl. Conference', issn: '978-93-9235-718-5', year: '2022', category: 'ict' },
+];
+---
+
+<Layout title="Publications - Dr. Pramod Kumar">
+  <Navbar />
+  <main>
+    <PageHero 
+      label="Research & Publications"
+      title="A Lifetime of"
+      highlight="Scholarly Work"
+      description="14 peer-reviewed papers in ISSN journals — spanning Environmental Ecology, Educational Psychology, ICT in Education, and Adolescent Behaviour."
+    />
+
+    <section class="bg-[#FAFAF7] py-24 px-6 lg:px-10">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Category Filter -->
+        <div class="flex flex-wrap gap-3 mb-12 justify-center">
+          {categories.map((cat) => (
+            <button 
+              data-category={cat.key}
+              class="category-btn px-5 py-2 rounded-full border border-slate-300 
+                     text-sm font-medium text-slate-600
+                     hover:border-gold-500 hover:text-gold-600 hover:bg-gold-500/5
+                     transition-all duration-300">
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
+        <!-- Papers List -->
+        <div class="space-y-4">
+          {papers.map((paper, i) => (
+            <article 
+              data-paper-category={paper.category}
+              class={`paper-card group bg-white rounded-2xl p-6 lg:p-8 
+                      border border-slate-200 hover:border-gold-500/50 hover:shadow-xl hover:shadow-navy-900/5
+                      transition-all duration-300 reveal reveal-delay-${(i % 6) + 1}`}>
+              
+              <div class="flex items-start gap-6">
+                <span class="font-serif text-3xl lg:text-4xl font-bold text-slate-200 
+                             group-hover:text-gold-500 transition-colors duration-300 
+                             flex-shrink-0 w-14 lg:w-16">
+                  {String(paper.n).padStart(2, '0')}
+                </span>
+                
+                <div class="flex-1">
+                  <h3 class="font-serif text-lg lg:text-xl font-bold text-navy-900 
+                             leading-snug mb-3 group-hover:text-royal-500 transition-colors">
+                    {paper.title}
+                  </h3>
+                  
+                  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full 
+                                 bg-navy-900/5 text-navy-800 font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" 
+                           fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
+                      </svg>
+                      {paper.journal}
+                    </span>
+                    <span class="text-slate-500">
+                      ISSN: <span class="text-gold-600 font-medium">{paper.issn}</span>
+                    </span>
+                    {paper.year && (
+                      <span class="text-slate-400">• {paper.year}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { number: '14', label: 'Total Papers' },
+            { number: '3', label: 'International' },
+            { number: '11', label: 'National' },
+            { number: '4', label: 'Research Areas' },
+          ].map((stat) => (
+            <div class="bg-navy-950 text-white p-6 rounded-2xl text-center">
+              <p class="font-serif text-3xl font-bold text-gold-500 mb-1">{stat.number}</p>
+              <p class="text-xs text-slate-400 uppercase tracking-wider">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Category filter
+  const buttons = document.querySelectorAll('.category-btn');
+  const papers = document.querySelectorAll('.paper-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+      
+      // Update active button
+      buttons.forEach((b) => {
+        b.classList.remove('border-gold-500', 'text-gold-600', 'bg-gold-500/5');
+      });
+      btn.classList.add('border-gold-500', 'text-gold-600', 'bg-gold-500/5');
+
+      // Filter papers
+      papers.forEach((paper) => {
+        const paperCat = paper.getAttribute('data-paper-category');
+        if (category === 'all' || paperCat === category) {
+          (paper as HTMLElement).style.display = 'block';
+        } else {
+          (paper as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Set "All" as active by default
+  document.querySelector('[data-category="all"]')?.classList.add('border-gold-500', 'text-gold-600', 'bg-gold-500/5');
+</script>

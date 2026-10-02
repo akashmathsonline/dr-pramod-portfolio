@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+
+const articles = [
+  {
+    title: 'शिक्षा में मनोविज्ञान की भूमिका: एक नई दृष्टि',
+    titleEn: 'The Role of Psychology in Education: A New Vision',
+    excerpt: 'किशोरावस्था में मानसिक स्वास्थ्य और शैक्षणिक प्रदर्शन के बीच गहरा संबंध है। यह लेख CBSE के MANODARPAN कार्यक्रम के अनुभवों पर आधारित है।',
+    category: 'Educational Psychology',
+    date: 'September 2025',
+    readTime: '8 min read',
+    lang: 'Hindi',
+  },
+  {
+    title: 'NEP 2020: Transforming Teacher Education in India',
+    excerpt: 'A comprehensive analysis of how NEP 2020 reshapes teacher training, mentorship, and capacity building across Indian schools.',
+    category: 'Policy & Reform',
+    date: 'August 2025',
+    readTime: '12 min read',
+    lang: 'English',
+  },
+  {
+    title: 'Atal Tinkering Labs: Nurturing Innovation at Grassroots',
+    excerpt: 'How ATLs are transforming STEM education in rural India — lessons from mentoring 100+ schools under NITI Aayog\'s flagship programme.',
+    category: 'STEM & Innovation',
+    date: 'July 2025',
+    readTime: '10 min read',
+    lang: 'English',
+  },
+  {
+    title: 'सैनिक स्कूल नालंदा: NDA के लिए तैयारी का मॉडल',
+    titleEn: 'Sainik School Nalanda: The NDA Preparation Model',
+    excerpt: '168+ कैडेट्स को NDA तक पहुँचाने के अनुभव — अनुशासन, अकादमिक उत्कृष्टता, और मानसिक स्वास्थ्य का संतुलन।',
+    category: 'Sainik School',
+    date: 'June 2025',
+    readTime: '7 min read',
+    lang: 'Hindi',
+  },
+  {
+    title: 'Social & Emotional Learning: The Missing Piece',
+    excerpt: 'Why SEL is critical for adolescent development and how CBSE\'s SEL Manual (which I helped pilot) is changing classrooms.',
+    category: 'SEL & Counselling',
+    date: 'May 2025',
+    readTime: '9 min read',
+    lang: 'English',
+  },
+  {
+    title: 'Indian Knowledge Systems in Modern Classrooms',
+    excerpt: 'Integrating IKS with contemporary pedagogy — reflections from organising the Nalanda Vigyan Sammelan 2025.',
+    category: 'Indian Knowledge Systems',
+    date: 'April 2025',
+    readTime: '11 min read',
+    lang: 'English',
+  },
+];
+---
+
+<Layout title="Blog & Articles - Dr. Pramod Kumar">
+  <Navbar />
+  <main>
+    <PageHero 
+      label="Blog & Articles"
+      title="Thoughts on"
+      highlight="Education"
+      description="Reflections, research insights, and lessons from 28+ years of teaching, mentoring, and shaping India's educational future — in English and Hindi."
+    />
+
+    <section class="bg-[#FAFAF7] py-24 px-6 lg:px-10">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Featured Article Hint -->
+        <div class="mb-16 p-8 rounded-3xl bg-navy-950 text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl"></div>
+          <div class="relative">
+            <span class="text-gold-500 text-xs font-bold tracking-[0.3em] uppercase">
+              Coming Soon
+            </span>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold mt-4 mb-4">
+              Full articles & essays will be <span class="italic text-gold-500">published soon</span>
+            </h2>
+            <p class="text-slate-400 text-lg max-w-2xl">
+              Dr. Kumar is preparing a collection of essays on educational psychology, NEP 2020, 
+              and Indian Knowledge Systems. Subscribe to be notified.
+            </p>
+          </div>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="grid md:grid-cols-2 gap-6">
+          {articles.map((article, i) => (
+            <article class={`group bg-white rounded-3xl p-8 border border-slate-200 
+                            hover:border-gold-500/50 hover:shadow-2xl hover:shadow-navy-900/5 
+                            transition-all duration-500 cursor-pointer reveal reveal-delay-${(i % 6) + 1}`}>
+              
+              <!-- Category + Language -->
+              <div class="flex items-center gap-3 mb-6">
+                <span class="text-xs font-bold tracking-wider uppercase text-royal-500">
+                  {article.category}
+                </span>
+                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${article.lang === 'Hindi' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}`}>
+                  {article.lang}
+                </span>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-serif text-xl lg:text-2xl font-bold text-navy-900 mb-3 leading-snug 
+                         group-hover:text-royal-500 transition-colors">
+                {article.title}
+              </h3>
+              {article.titleEn && (
+                <p class="text-sm text-slate-500 italic mb-4">{article.titleEn}</p>
+              )}
+
+              <!-- Excerpt -->
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                {article.excerpt}
+              </p>
+
+              <!-- Meta -->
+              <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                <div class="flex items-center gap-3 text-xs text-slate-500">
+                  <span>{article.date}</span>
+                  <span>•</span>
+                  <span>{article.readTime}</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" 
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="text-slate-300 group-hover:text-gold-500 group-hover:translate-x-1 transition-all duration-300">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

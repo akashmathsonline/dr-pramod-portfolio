@@ -1,0 +1,88 @@
+---
+const pillars = [
+  {
+    tag: 'Mentorship',
+    title: 'For Students',
+    desc: 'Driving 100% CBSE board success in Biology and nurturing student mental health through certified psychological counselling.',
+    img: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_oqmkBetzIqUnPhicZdo5ldPdWdUOqZMM1Eb-ZiZ6e_baa7w8AVF1GYypR00Izr9CALZiwHTgpc-7sTNZze4IZBkuHtfCTuGjGG5MK_945emy0DqYEXA7VjwKTorHuxKB8nvZT5f5dhmgKEjYfyuRL_g-0RKscv-bWzI-I3z5OOrnRY8TSwcyR3zBWcQ/s1600/WhatsApp%20Image%202026-09-02%20at%2015.41.25.jpeg',
+  },
+  {
+    tag: 'Training',
+    title: 'For Educators',
+    desc: 'Empowering over 2.5 lakh teachers and principals nationwide on NEP 2020 guidelines and modern pedagogy.',
+    img: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0qEStekO_-TfmtSBPaB8VpBLvT7HK9XvV2g6nrjmC6MqlQeDtvRB5lKMdUtyxSu3MdBHX1IM1sythF9NhAyv1fQQMZvi7m5H63fBbwgsmE7SSIyhi-FIKBm-FTapOsJPSYKXNUsv4E0ljUvw7UHe62WZB_ml7dAvuEZ_vNpLVu6MrmtzV6quYWpgu23w/s1600/WhatsApp%20Image%202026-09-02%20at%2015.41.32.jpeg',
+  },
+  {
+    tag: 'Curriculum',
+    title: 'NCERT & CBSE',
+    desc: 'Developing foundational laboratory manuals, biology frameworks, and key textbook guidelines for schools across India.',
+    img: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoTLmnC0OxGmfC6oNebwjjFgQ3Gr7f4Eh2_GIDXjUZIRlDSeHMrhR1-jNsSzVSnew6dtoxeALUvndyV-P1-LaFXxnl80gtQOTrzPUA7Ptw0Xfrho7xtpN5tGassbKjjGAVRNbpoBonzWufzWyuZax7CejvykQ6VcI6TzRmDYNIk85JUU6cRw1TTyuQ-jo/s1600/WhatsApp%20Image%202026-09-02%20at%2015.41.30%20%281%29.jpeg',
+  },
+  {
+    tag: 'Leadership',
+    title: 'Sainik School',
+    desc: 'Leading academic administration and holistic excellence as Senior Master (Training) at Sainik School Nalanda.',
+    img: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfI3d5Cj1z042ZSQiFS8hr_jSVIZrya6lIsxIK1nj1Tu_KKBs0mQKbaQAipQrPwGBILX4qQwGZh-MdEpXrye3Q8fmvrbPZgCt4ACOS_LAcPHMRxlDhcp3pXAE76V7KelD0TTdn6TrG8_dZo_DiDS8NdIWk11n5nVSPbNL8P68IttknGBTRJYF-XApwdXU/s1600/WhatsApp%20Image%202026-09-02%20at%2015.41.30.jpeg',
+  },
+];
+---
+
+<section class="relative bg-[#FAFAF7] py-24 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Header -->
+    <div class="max-w-3xl mb-16">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <span class="w-12 h-px bg-gold-500"></span>
+        <span class="text-gold-600 text-xs font-semibold tracking-[0.3em] uppercase">Impact Areas</span>
+      </div>
+      <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-6">
+        Inspiring Change Across <span class="italic text-royal-500">Indian Education</span>
+      </h2>
+      <p class="text-lg text-slate-600">
+        Four pillars on which Dr. Kumar's lifelong mission stands — each one transforming lives and building a scientifically vibrant India.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {pillars.map((pillar, i) => (
+        <div class="group bg-white rounded-3xl overflow-hidden border border-slate-200
+                    hover:shadow-2xl hover:shadow-navy-900/10 hover:-translate-y-2
+                    transition-all duration-500 flex flex-col">
+          
+          <!-- Image -->
+          <div class="relative h-64 overflow-hidden bg-slate-100">
+            <img src={pillar.img} alt={pillar.title} 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm
+                            text-navy-900 text-xs font-bold tracking-wider uppercase">
+                {pillar.tag}
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="font-serif text-xl font-bold text-navy-900 mb-3">
+              {pillar.title}
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed flex-1 mb-5">
+              {pillar.desc}
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 text-royal-500 font-semibold text-xs uppercase tracking-wider
+                                group-hover:gap-3 transition-all duration-300">
+              Learn More
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" 
+                   fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

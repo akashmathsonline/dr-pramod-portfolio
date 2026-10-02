@@ -1,0 +1,120 @@
+/* Dr. Pramod Kumar - Premium Portfolio */
+/* Design System: Colors, Typography, Base Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-navy-50: #f0f4f9;
+  --color-navy-100: #dce4ef;
+  --color-navy-200: #b9c9df;
+  --color-navy-300: #8ba6c5;
+  --color-navy-400: #5a7fa5;
+  --color-navy-500: #3a5c7e;
+  --color-navy-600: #2a4560;
+  --color-navy-700: #1e3148;
+  --color-navy-800: #141f30;
+  --color-navy-900: #0a1628;
+  --color-navy-950: #060d18;
+
+  --color-royal-500: #1E40AF;
+  --color-royal-600: #1e3a8a;
+
+  --color-gold-400: #E5C158;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #B8941F;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #FAFAF7;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+::selection {
+  background-color: #38BDF8;
+  color: #0a1628;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0a1628;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1E40AF;
+}
+/* ============================================
+   SCROLL ANIMATIONS - Premium Reveal Effects
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Elements start invisible, reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for lists/grids */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* Smooth page load fade */
+html {
+  animation: fadeIn 0.4s ease-in;
+}

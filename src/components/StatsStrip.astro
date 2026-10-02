@@ -1,0 +1,61 @@
+---
+const stats = [
+  { 
+    prefix: '', 
+    number: null, 
+    displayText: 'National', 
+    label: "Teachers' Award Winner", 
+    sublabel: '2025 - Govt. of India' 
+  },
+  { 
+    prefix: '', 
+    number: 2.5, 
+    suffix: ' Lakh+', 
+    displayText: null, 
+    label: 'Educators Trained', 
+    sublabel: 'Across India' 
+  },
+  { 
+    prefix: '', 
+    number: 28, 
+    suffix: '+', 
+    displayText: null, 
+    label: 'Years of Legacy', 
+    sublabel: 'Teaching & Mentoring' 
+  },
+  { 
+    prefix: '', 
+    number: 14, 
+    suffix: '', 
+    displayText: null, 
+    label: 'Research Papers', 
+    sublabel: 'In ISSN Journals' 
+  },
+];
+---
+
+<section class="relative bg-[#FAFAF7] pt-24 pb-24 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-3xl overflow-hidden shadow-2xl shadow-navy-900/5">
+      {stats.map((stat, i) => (
+        <div class={`group bg-white p-8 lg:p-10 hover:bg-navy-900 transition-all duration-500 cursor-default reveal reveal-delay-${i + 1}`}>
+          <p class="font-serif text-3xl lg:text-4xl font-bold text-navy-900 group-hover:text-gold-500 transition-colors duration-500 mb-3">
+            {stat.displayText ? (
+              stat.displayText
+            ) : (
+              <>
+                <span data-counter={stat.number}>{stat.number}</span>{stat.suffix}
+              </>
+            )}
+          </p>
+          <p class="text-sm font-semibold text-navy-800 group-hover:text-white transition-colors duration-500 mb-1 uppercase tracking-wider">
+            {stat.label}
+          </p>
+          <p class="text-xs text-slate-500 group-hover:text-slate-400 transition-colors duration-500">
+            {stat.sublabel}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

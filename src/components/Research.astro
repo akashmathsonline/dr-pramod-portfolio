@@ -1,0 +1,90 @@
+---
+const papers = [
+  { title: 'Birth order and academic performance', journal: 'International Journal of Education for the Future', issn: '2394-9902' },
+  { title: 'Management techniques of aquaculture and harvesting in context of carrying capacity of fresh water ponds', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X' },
+  { title: 'Studies of distribution in time and space of the periphyton on ponds of Nalanda (Bihar)', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X' },
+  { title: 'Planktonic primary productivity of fresh water ponds in Tirhut region (North Bihar)', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X' },
+  { title: 'Study of some aspects of ecology of certain fish ponds in relation to seasonal variation', journal: 'Uttar Pradesh Journal of Zoology', issn: '0256-971X' },
+  { title: 'Studies on the seasonal variation in Macrophytic Population and its impact on Fish production', journal: 'Aegaeum Journal', issn: '0776-3808' },
+  { title: 'A study on relation between Need for Achievement and Sibling distance in Adolescent Learners', journal: 'Aegaeum Journal', issn: '0776-3808' },
+  { title: 'A study on significant variation in Need of Affiliation with Sibling-distance in Adolescents', journal: 'Aegaeum Journal', issn: '0776-3808' },
+  { title: 'A study on usefulness of ICT for Teachers and Students in teaching Science subjects', journal: 'Aegaeum Journal', issn: '0776-3808' },
+  { title: 'Study on relation between Birth Order and Personality', journal: 'Aegaeum Journal', issn: '0776-3808' },
+  { title: 'Science and technology as a tool for promoting peace', journal: 'Intl. Conference on Holistic Development', issn: '978-93-9235-718-5' },
+  { title: 'Use of bio-fertilizers maintains the nutritional value of crop', journal: 'E-journal of VB University, Hazaribagh', issn: 'ISSN Refereed' },
+  { title: 'ICT as important tool for teachers undergoing training in Training Colleges of India', journal: 'Intl. Conference Proceedings', issn: '978-93-9235-718-5' },
+  { title: 'Shelf-life of fresh water fish under different cost effective storage conditions', journal: '20th Congress of Zoology Proceedings', issn: 'E-Proceedings' },
+];
+---
+
+<section id="research" class="relative bg-navy-950 py-24 px-6 lg:px-10 overflow-hidden">
+  <div class="absolute top-1/4 right-0 w-96 h-96 bg-royal-500/10 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    
+    <!-- Header -->
+    <div class="grid lg:grid-cols-12 gap-12 mb-16 items-end">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 mb-6">
+          <span class="w-12 h-px bg-gold-500"></span>
+          <span class="text-gold-500 text-xs font-semibold tracking-[0.3em] uppercase">Research & Publications</span>
+        </div>
+        <h2 class="font-serif text-4xl lg:text-6xl font-bold text-white leading-tight">
+          14 Papers. <span class="italic text-gold-500">One Mission.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="text-slate-400 text-lg leading-relaxed">
+          Published in peer-reviewed journals with ISSN numbers — spanning Environmental Ecology, 
+          Educational Psychology, ICT in Education, and Adolescent Behaviour.
+        </p>
+      </div>
+    </div>
+
+    <!-- Papers List -->
+    <div class="space-y-px bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+      {papers.map((paper, i) => (
+        <div class="group bg-navy-950 hover:bg-white/5 p-6 lg:p-7 flex items-start gap-6 
+                    transition-all duration-300 cursor-default">
+          
+          <span class="font-serif text-2xl font-bold text-white/20 group-hover:text-gold-500 
+                       transition-colors duration-300 flex-shrink-0 w-12">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          
+          <div class="flex-1 min-w-0">
+            <h3 class="text-white font-medium leading-relaxed mb-2 group-hover:text-gold-400 
+                       transition-colors duration-300">
+              {paper.title}
+            </h3>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+              <span class="text-slate-500 italic">{paper.journal}</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-gold-500/70 tracking-wider">ISSN: {paper.issn}</span>
+            </div>
+          </div>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" 
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="text-white/20 group-hover:text-gold-500 transition-colors flex-shrink-0 mt-1">
+            <path d="M7 17L17 7M7 7h10v10"/>
+          </svg>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <p class="text-slate-500 text-sm mb-4">Also contributed to CBSE's Capacity Building Modules on</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {['Life Skills', 'Stress Management', 'Social & Emotional Learning'].map((item) => (
+          <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 
+                       text-slate-300 text-sm hover:border-gold-500/50 transition-colors">
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
