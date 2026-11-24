@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'uhka7oz2',
     dataset: 'production',
   },
+  studioHost: 'dr-pramod-kumar',
 });
