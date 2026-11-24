@@ -3,142 +3,278 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import PageHero from '../components/PageHero.astro';
 import Footer from '../components/Footer.astro';
+import { getBlogPosts } from '../lib/sanity';
 
-const articles = [
-  {
-    title: 'शिक्षा में मनोविज्ञान की भूमिका: एक नई दृष्टि',
-    titleEn: 'The Role of Psychology in Education: A New Vision',
-    excerpt: 'किशोरावस्था में मानसिक स्वास्थ्य और शैक्षणिक प्रदर्शन के बीच गहरा संबंध है। यह लेख CBSE के MANODARPAN कार्यक्रम के अनुभवों पर आधारित है।',
-    category: 'Educational Psychology',
-    date: 'September 2025',
-    readTime: '8 min read',
-    lang: 'Hindi',
-  },
-  {
-    title: 'NEP 2020: Transforming Teacher Education in India',
-    excerpt: 'A comprehensive analysis of how NEP 2020 reshapes teacher training, mentorship, and capacity building across Indian schools.',
-    category: 'Policy & Reform',
-    date: 'August 2025',
-    readTime: '12 min read',
-    lang: 'English',
-  },
-  {
-    title: 'Atal Tinkering Labs: Nurturing Innovation at Grassroots',
-    excerpt: 'How ATLs are transforming STEM education in rural India — lessons from mentoring 100+ schools under NITI Aayog\'s flagship programme.',
-    category: 'STEM & Innovation',
-    date: 'July 2025',
-    readTime: '10 min read',
-    lang: 'English',
-  },
-  {
-    title: 'सैनिक स्कूल नालंदा: NDA के लिए तैयारी का मॉडल',
-    titleEn: 'Sainik School Nalanda: The NDA Preparation Model',
-    excerpt: '168+ कैडेट्स को NDA तक पहुँचाने के अनुभव — अनुशासन, अकादमिक उत्कृष्टता, और मानसिक स्वास्थ्य का संतुलन।',
-    category: 'Sainik School',
-    date: 'June 2025',
-    readTime: '7 min read',
-    lang: 'Hindi',
-  },
-  {
-    title: 'Social & Emotional Learning: The Missing Piece',
-    excerpt: 'Why SEL is critical for adolescent development and how CBSE\'s SEL Manual (which I helped pilot) is changing classrooms.',
-    category: 'SEL & Counselling',
-    date: 'May 2025',
-    readTime: '9 min read',
-    lang: 'English',
-  },
-  {
-    title: 'Indian Knowledge Systems in Modern Classrooms',
-    excerpt: 'Integrating IKS with contemporary pedagogy — reflections from organising the Nalanda Vigyan Sammelan 2025.',
-    category: 'Indian Knowledge Systems',
-    date: 'April 2025',
-    readTime: '11 min read',
-    lang: 'English',
-  },
-];
+const rawArticles = await getBlogPosts();
+
+const articles = rawArticles.map((article: any) => ({
+  id: article._id,
+  title: article.title,
+  language: article.language || (article.title && /[\u0900-\u097F]/.test(article.title) ? 'Hindi' : 'English'),
+  category: article.category || 'Education',
+  excerpt: article.excerpt || '',
+  content: article.content || article.excerpt || '',
+  publishedAt: article.publishedAt || '2025-09-05',
+  readTime: article.readTime || (article.language === 'Hindi' ? '4 मिनट' : '4 min read')
+}));
 ---
 
-<Layout title="Blog & Articles - Dr. Pramod Kumar">
+<Layout title="Blog & Articles - Dr. Pramod Kumar | विचार एवं दृष्टिकोण">
   <Navbar />
   <main>
     <PageHero 
-      label="Blog & Articles"
+      label="Reflections & Insights"
       title="Thoughts on"
-      highlight="Education"
-      description="Reflections, research insights, and lessons from 28+ years of teaching, mentoring, and shaping India's educational future — in English and Hindi."
+      highlight="Education & Leadership"
+      description="Reflections, laboratory innovations, and lessons from 28+ years of shaping India's future — published in Hindi and English."
     />
 
-    <section class="bg-[#FAFAF7] py-24 px-6 lg:px-10">
+    <section class="bg-[#FAFAF7] py-20 px-6 lg:px-10">
       <div class="max-w-5xl mx-auto">
         
-        <!-- Featured Article Hint -->
-        <div class="mb-16 p-8 rounded-3xl bg-navy-950 text-white relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl"></div>
-          <div class="relative">
-            <span class="text-gold-500 text-xs font-bold tracking-[0.3em] uppercase">
-              Coming Soon
-            </span>
-            <h2 class="font-serif text-3xl lg:text-4xl font-bold mt-4 mb-4">
-              Full articles & essays will be <span class="italic text-gold-500">published soon</span>
-            </h2>
-            <p class="text-slate-400 text-lg max-w-2xl">
-              Dr. Kumar is preparing a collection of essays on educational psychology, NEP 2020, 
-              and Indian Knowledge Systems. Subscribe to be notified.
-            </p>
-          </div>
+        <!-- Language Filter Pills -->
+        <div class="flex items-center justify-center gap-3 mb-14">
+          <button
+            type="button"
+            data-lang="all"
+            class="lang-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer bg-navy-900 text-gold-400 shadow-md ring-2 ring-navy-900"
+          >
+            All Articles / सभी लेख
+          </button>
+          <button
+            type="button"
+            data-lang="Hindi"
+            class="lang-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer bg-white text-slate-600 hover:text-navy-900 border border-slate-200"
+          >
+            🇮🇳 हिंदी विचार (Hindi)
+          </button>
+          <button
+            type="button"
+            data-lang="English"
+            class="lang-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer bg-white text-slate-600 hover:text-navy-900 border border-slate-200"
+          >
+            English Articles
+          </button>
         </div>
 
         <!-- Articles Grid -->
-        <div class="grid md:grid-cols-2 gap-6">
-          {articles.map((article, i) => (
-            <article class={`group bg-white rounded-3xl p-8 border border-slate-200 
-                            hover:border-gold-500/50 hover:shadow-2xl hover:shadow-navy-900/5 
-                            transition-all duration-500 cursor-pointer reveal reveal-delay-${(i % 6) + 1}`}>
-              
-              <!-- Category + Language -->
-              <div class="flex items-center gap-3 mb-6">
-                <span class="text-xs font-bold tracking-wider uppercase text-royal-500">
-                  {article.category}
-                </span>
-                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${article.lang === 'Hindi' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}`}>
-                  {article.lang}
-                </span>
+        <div id="articles-grid" class="grid md:grid-cols-2 gap-8">
+          {articles.map((article: any, i: number) => (
+            <article 
+              data-lang={article.language}
+              data-index={i}
+              class="article-card group bg-white rounded-3xl p-8 border border-slate-200/90 
+                     hover:border-gold-500/60 hover:shadow-2xl hover:shadow-navy-950/10 
+                     hover:-translate-y-1.5 transition-all duration-500 cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <!-- Category & Language Header -->
+                <div class="flex items-center justify-between gap-3 mb-5">
+                  <span class="text-xs font-bold tracking-wider uppercase text-royal-500 bg-blue-50/80 px-3 py-1 rounded-full border border-blue-100">
+                    {article.category}
+                  </span>
+                  
+                  <span class={`text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${
+                    article.language === 'Hindi' 
+                      ? 'bg-amber-100/80 text-amber-900 border border-amber-200' 
+                      : 'bg-slate-100 text-slate-700 border border-slate-200'
+                  }`}>
+                    {article.language === 'Hindi' ? 'हिंदी' : 'English'}
+                  </span>
+                </div>
+
+                <!-- Title -->
+                <h3 class="font-serif text-xl lg:text-2xl font-bold text-navy-900 mb-4 leading-snug group-hover:text-royal-500 transition-colors">
+                  {article.title}
+                </h3>
+
+                <!-- Excerpt -->
+                <p class="text-sm text-slate-600 leading-relaxed mb-6 line-clamp-3">
+                  {article.excerpt}
+                </p>
               </div>
 
-              <!-- Title -->
-              <h3 class="font-serif text-xl lg:text-2xl font-bold text-navy-900 mb-3 leading-snug 
-                         group-hover:text-royal-500 transition-colors">
-                {article.title}
-              </h3>
-              {article.titleEn && (
-                <p class="text-sm text-slate-500 italic mb-4">{article.titleEn}</p>
-              )}
-
-              <!-- Excerpt -->
-              <p class="text-sm text-slate-600 leading-relaxed mb-6">
-                {article.excerpt}
-              </p>
-
-              <!-- Meta -->
-              <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                <div class="flex items-center gap-3 text-xs text-slate-500">
-                  <span>{article.date}</span>
+              <!-- Footer with Date & Read CTA -->
+              <div class="pt-5 border-t border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs text-slate-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span>{new Date(article.publishedAt).toLocaleDateString('en-IN', { month: 'short', year: 'numeric', day: 'numeric' })}</span>
                   <span>•</span>
                   <span>{article.readTime}</span>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" 
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="text-slate-300 group-hover:text-gold-500 group-hover:translate-x-1 transition-all duration-300">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-royal-500 group-hover:text-gold-600 transition-colors">
+                  Read Article
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-1 transition-transform">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
               </div>
             </article>
           ))}
         </div>
 
+        <!-- Empty State -->
+        <div id="articles-empty" class="hidden text-center py-20">
+          <p class="text-slate-400 text-lg">इस भाषा में अभी कोई लेख उपलब्ध नहीं है।</p>
+        </div>
+
       </div>
     </section>
+
+    <!-- Reading Modal -->
+    <div 
+      id="reading-modal" 
+      class="fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4 md:p-8"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="relative max-w-3xl w-full max-h-[85vh] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col">
+        
+        <!-- Modal Top Bar -->
+        <div class="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div class="flex items-center gap-3">
+            <span id="modal-category" class="text-xs font-bold tracking-wider uppercase text-royal-500 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+              Category
+            </span>
+            <span id="modal-date" class="text-xs text-slate-500">
+              Date
+            </span>
+          </div>
+          
+          <button 
+            id="modal-close" 
+            class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close article"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Article Content Scrollable -->
+        <div class="p-6 md:p-10 overflow-y-auto space-y-6">
+          <h2 id="modal-title" class="font-serif text-2xl md:text-3xl font-bold text-navy-900 leading-snug">
+            Article Title
+          </h2>
+
+          <div class="flex items-center gap-3 py-3 border-y border-slate-100 text-xs text-slate-500">
+            <div class="w-8 h-8 rounded-full bg-navy-900 text-gold-400 font-bold flex items-center justify-center text-xs">
+              PK
+            </div>
+            <div>
+              <p class="font-bold text-navy-900">Dr. Pramod Kumar</p>
+              <p class="text-[11px] text-slate-500">Senior Master, Sainik School Nalanda • National Awardee 2025</p>
+            </div>
+          </div>
+
+          <div id="modal-body" class="text-slate-700 leading-relaxed text-base md:text-lg space-y-5 whitespace-pre-line">
+            Article body text here...
+          </div>
+        </div>
+
+        <!-- Modal Bottom Bar -->
+        <div class="p-4 md:p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+          <p class="text-xs text-slate-500">
+            Published in the official academic reflections repository.
+          </p>
+          <button 
+            id="modal-close-bottom" 
+            class="px-5 py-2 rounded-full bg-navy-900 text-white hover:bg-navy-800 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
+          >
+            Back to Articles / वापस जाएं
+          </button>
+        </div>
+
+      </div>
+    </div>
+
   </main>
   <Footer />
 </Layout>
+
+<script define:vars={{ articles }}>
+  // Language Filtering
+  const langButtons = document.querySelectorAll('.lang-btn');
+  const articleCards = document.querySelectorAll('.article-card');
+  const articlesEmpty = document.getElementById('articles-empty');
+
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      langButtons.forEach(b => {
+        b.classList.remove('bg-navy-900', 'text-gold-400', 'ring-2', 'ring-navy-900');
+        b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      });
+      btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      btn.classList.add('bg-navy-900', 'text-gold-400', 'ring-2', 'ring-navy-900');
+
+      const selectedLang = btn.getAttribute('data-lang');
+      let visible = 0;
+
+      articleCards.forEach(card => {
+        const cardLang = card.getAttribute('data-lang');
+        if (selectedLang === 'all' || cardLang === selectedLang) {
+          (card as HTMLElement).style.display = 'flex';
+          visible++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (articlesEmpty) {
+        articlesEmpty.style.display = visible === 0 ? 'block' : 'none';
+      }
+    });
+  });
+
+  // Reading Modal Logic
+  const modal = document.getElementById('reading-modal');
+  const modalClose = document.getElementById('modal-close');
+  const modalCloseBottom = document.getElementById('modal-close-bottom');
+  const modalTitle = document.getElementById('modal-title');
+  const modalCategory = document.getElementById('modal-category');
+  const modalDate = document.getElementById('modal-date');
+  const modalBody = document.getElementById('modal-body');
+
+  function openArticle(index: number) {
+    const article = articles[index];
+    if (!article || !modal) return;
+
+    if (modalTitle) modalTitle.textContent = article.title;
+    if (modalCategory) modalCategory.textContent = article.category;
+    if (modalDate) modalDate.textContent = article.publishedAt;
+    if (modalBody) modalBody.textContent = article.content || article.excerpt;
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeArticle() {
+    if (!modal) return;
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  articleCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.getAttribute('data-index') || '0', 10);
+      openArticle(idx);
+    });
+  });
+
+  if (modalClose) modalClose.addEventListener('click', closeArticle);
+  if (modalCloseBottom) modalCloseBottom.addEventListener('click', closeArticle);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeArticle();
+    });
+  }
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeArticle();
+  });
+</script>
